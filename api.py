@@ -2,7 +2,7 @@ from datetime import timedelta
 import os
 
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, render_template
 from flask_jwt import JWT
 from flask_restful import Api
 
@@ -31,6 +31,12 @@ api.add_resource(AllMessages, '/received')
 api.add_resource(UnreadMessages, '/unread')
 api.add_resource(NewMessage, '/send_message')
 api.add_resource(Message, '/message/<int:message_id>')
+
+
+@app.route("/")
+def home():
+    return render_template('home.html')
+
 
 if __name__ == '__main__':
     app.run(debug=False)
